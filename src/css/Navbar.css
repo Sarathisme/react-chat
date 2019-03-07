@@ -1,0 +1,14 @@
+.navbar {
+    width: 100%;
+    padding: 0px 8px;
+    position: fixed;
+    top: 0;
+}
+
+.btn {
+    margin: 8px 16px;
+}
+
+.logo {
+    border-radius: 50%;
+}

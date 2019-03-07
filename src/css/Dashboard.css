@@ -1,0 +1,13 @@
+.body, .row {
+    height: 100%;
+}
+
+.content {
+    height: 100%;
+}
+
+.col-lg-9, .col-lg-3 {
+    margin-top: 6rem;
+    margin-bottom: 3rem;
+    padding: 16px;
+}

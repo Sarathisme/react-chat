@@ -12,8 +12,6 @@ class GoogleSignIn extends Component {
 
     this.state = {
       redirect: false,
-      data: null,
-      cookie: this.props.cookies
     }
   }
 
@@ -45,17 +43,37 @@ class App extends Component {
   }
 
   onSuccess(response) {
-    this.setState({
-      redirect: true,
-      data: response.profileObj
-    });
+    const id = response.profileObj.googleId;
+    fetch('http://localhost:9000/add/user', {
+      method: 'post',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: response.profileObj.googleId,
+        name: response.profileObj.name,
+        email: response.profileObj.email,
+        photo: response.profileObj.imageUrl,
+      })
+    }).then((response) => {
+      console.log(response);
+        if(response.statusText === "OK") {
+          const { cookies } = this.props;
+          cookies.set("id", id, {path: '/'});
 
-    const { cookies } = this.props;
-    cookies.set("id", response.profileObj.googleId, {path: '/'});
+          this.setState({
+            redirect: true,
+          });
+        } else {
+          console.log(response);
+        }
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   onFailure(response) {
-    console.log(response);
+    console.log((response));
   }
 
   render() {
@@ -65,7 +83,6 @@ class App extends Component {
             {
               pathname: "/dashboard",
               data: this.state.data,
-              cookies: this.props.cookies
             }
           } />
       );

@@ -13,6 +13,7 @@ const userSchema = new Schema({
     id: String,
     name: String,
     photo: String,
+    email: String,
     chats: [{ type: Schema.Types.ObjectId, ref:'Chat' }]
 });
 

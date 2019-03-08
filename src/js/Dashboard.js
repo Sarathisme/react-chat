@@ -8,28 +8,16 @@ import { withCookies } from "react-cookie";
 class Dashboard extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            data: this.props.location.data
-        };
-
-        const cookies = this.props.cookies;
-        console.log(cookies.get("id"));
     }
 
     render() {
         return (
             <div className="body">
-                {/*<Navbar data={*/}
-                    {/*{*/}
-                        {/*photo: this.state.data.imageUrl,*/}
-                        {/*name: this.state.data.name*/}
-                    {/*}*/}
-                {/*} />*/}
+                <Navbar />
                 <div className="container-fluid content">
                     <div className="row">
                         <div className="col-lg-3">
-                            {/*<Users/>*/}
+                            <Users/>
                         </div>
                         <div className="col-lg-9">
                             <ChatWindow/>

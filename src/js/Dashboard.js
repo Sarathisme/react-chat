@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Users from './components/Users';
 import ChatWindow from './components/ChatWindow';
 import '../css/Dashboard.css';
+import { withCookies } from "react-cookie";
 
 class Dashboard extends Component {
     constructor(props) {
@@ -12,22 +13,23 @@ class Dashboard extends Component {
             data: this.props.location.data
         };
 
-        console.log(this.state.data);
+        const cookies = this.props.cookies;
+        console.log(cookies.get("id"));
     }
 
     render() {
         return (
             <div className="body">
-                <Navbar data={
-                    {
-                        photo: this.state.data.imageUrl,
-                        name: this.state.data.name
-                    }
-                } />
+                {/*<Navbar data={*/}
+                    {/*{*/}
+                        {/*photo: this.state.data.imageUrl,*/}
+                        {/*name: this.state.data.name*/}
+                    {/*}*/}
+                {/*} />*/}
                 <div className="container-fluid content">
                     <div className="row">
                         <div className="col-lg-3">
-                            <Users/>
+                            {/*<Users/>*/}
                         </div>
                         <div className="col-lg-9">
                             <ChatWindow/>
@@ -39,4 +41,4 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+export default withCookies(Dashboard);

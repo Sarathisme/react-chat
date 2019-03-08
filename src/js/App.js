@@ -3,6 +3,7 @@ import logo from '../logo.svg';
 import '../css/App.css';
 import { GoogleLogin } from 'react-google-login';
 import {Redirect} from "react-router-dom";
+import { withCookies } from 'react-cookie';
 
 class GoogleSignIn extends Component {
 
@@ -11,7 +12,8 @@ class GoogleSignIn extends Component {
 
     this.state = {
       redirect: false,
-      data: null
+      data: null,
+      cookie: this.props.cookies
     }
   }
 
@@ -46,7 +48,10 @@ class App extends Component {
     this.setState({
       redirect: true,
       data: response.profileObj
-    })
+    });
+
+    const { cookies } = this.props;
+    cookies.set("id", response.profileObj.googleId, {path: '/'});
   }
 
   onFailure(response) {
@@ -60,6 +65,7 @@ class App extends Component {
             {
               pathname: "/dashboard",
               data: this.state.data,
+              cookies: this.props.cookies
             }
           } />
       );
@@ -87,4 +93,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withCookies(App);

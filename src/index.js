@@ -5,14 +5,17 @@ import App from './js/App';
 import Dashboard from './js/Dashboard';
 import * as serviceWorker from './js/serviceWorker';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { CookiesProvider } from "react-cookie";
 
 ReactDOM.render(
-    <Router>
-        <Switch>
-            <Route exact path="/" component={App}/>
-            <Route path="/dashboard" component={Dashboard}/>
-        </Switch>
-    </Router>
+    <CookiesProvider>
+        <Router>
+            <Switch>
+                <Route exact path="/" component={App}/>
+                <Route path="/dashboard" component={Dashboard}/>
+            </Switch>
+        </Router>
+    </CookiesProvider>
     , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

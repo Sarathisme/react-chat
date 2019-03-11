@@ -26,7 +26,7 @@ app.post('/user', (req, res) => {
     });
 });
 
-app.post('/add/user', cors(), (req, res) => {
+app.post('/add/user', (req, res) => {
     let newUser = new User({
        id: req.body.id,
        name: req.body.name,
@@ -42,6 +42,14 @@ app.post('/add/user', cors(), (req, res) => {
         }
     });
 });
+
+app.post('/chat/users', (req, res) => {
+   User.findOne({id: req.body.id}, (err, user) => {
+       console.log(user);
+     res.status(200).send({"chats": user.chats});
+   });
+});
+
 
 mongoose.connect(DATABASE_URI, { useNewUrlParser: true }).then((value => {
     app.listen(PORT, debug=true);

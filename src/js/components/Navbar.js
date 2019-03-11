@@ -7,8 +7,8 @@ class Navbar extends Component {
         super(props);
 
         this.state = {
-            photo: "",
-            name: ""
+            photo: "https://placeimg.com/640/480/any",
+            name: "John Doe"
         };
     }
 

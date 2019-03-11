@@ -9,8 +9,6 @@ class List extends Component {
         this.state = {
             "data": this.props.chats
         };
-
-        console.log("Here");
     }
 
     render() {
@@ -27,25 +25,87 @@ class List extends Component {
     }
 }
 
+class SearchResults extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            "users": this.props.results
+        }
+    }
+
+    render() {
+        return (
+            <ul className="list-group">
+                {
+                    Object.values(JSON.parse(this.state.users)).map((user) =>
+                        <li key={ user.id } className="list-group-item d-flex justify-content-between align-items-center" onClick={this.props.onItemClick}>
+                            { user.name }
+                        </li>
+                    )}
+            </ul>
+        );
+    }
+}
+
 class Users extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             chats: [],
-            count: 0
+            show_search: false,
+            results: []
         };
 
         this.onItemClick = this.onItemClick.bind(this);
+        this.onSearchChange = this.onSearchChange.bind(this);
+        this.getRecentChats = this.getRecentChats.bind(this);
     }
 
     onItemClick(e) {
         alert("Item clicked!");
     }
 
-    componentWillMount() {
+    onSearchChange(e) {
+
+        if(e.target.value === '') {
+            this.getRecentChats();
+        }
+
+        fetch("http://localhost:9000/get/users", {
+            method: 'post',
+            headers: {
+                'Content-type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Content-type'
+            },
+            body: JSON.stringify({
+                "query": e.target.value
+            }),
+        }).then(response => {
+            if (response.statusText === 'OK') {
+                response.json().then(data => {
+                    this.setState({
+                        show_search: true,
+                        results: data.results
+                    });
+                });
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
+    getRecentChats() {
         const { cookies } = this.props;
         const id = cookies.get('id');
+
+        this.setState({
+            chats: [],
+            show_search: false,
+            results: []
+        });
 
         fetch("http://localhost:9000/chat/users", {
             method: 'post',
@@ -71,18 +131,24 @@ class Users extends Component {
         });
     }
 
+    componentWillMount() {
+        this.getRecentChats();
+    }
+
     render() {
         let list;
 
-        if ( this.state.count > 0) {
+        if (!this.state.show_search) {
             list = <List chats={this.state.chats} onItemClick={this.onItemClick}/>
+        } else {
+            list = <SearchResults results={JSON.stringify(this.state.results)} onItemClick={this.onItemClick}/>
         }
 
         return (
             <div className="users-content">
                 <div className="form-group has-search">
                     <span className="fa fa-search form-control-feedback"/>
-                    <input type="text" className="form-control" placeholder="Search"/>
+                    <input type="text" className="form-control input" placeholder="Search" onChange={this.onSearchChange}/>
                     <div>
                         {list}
                     </div>

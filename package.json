@@ -3,14 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@progress/kendo-react-buttons": "^2.7.1",
+    "@progress/kendo-react-conversational-ui": "^2.7.1",
+    "@progress/kendo-react-intl": "^2.7.1",
     "react": "^16.8.4",
+    "react-chat-elements": "^10.3.0",
     "react-cookie": "^3.0.8",
     "react-dom": "^16.8.4",
     "react-google-login": "^5.0.2",
+    "react-native-vector-icons": "^6.3.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.8",
-    "react-search-input": "^0.11.3"
+    "react-scripts": "2.1.8"
   },
   "scripts": {
     "start": "react-scripts start",

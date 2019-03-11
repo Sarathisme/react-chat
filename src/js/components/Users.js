@@ -54,8 +54,8 @@ class Users extends Component {
 
         this.state = {
             chats: [],
+            results: [],
             show_search: false,
-            results: []
         };
 
         this.onItemClick = this.onItemClick.bind(this);
@@ -99,8 +99,6 @@ class Users extends Component {
 
     getRecentChats() {
         const { cookies } = this.props;
-        const id = cookies.get('id');
-
         this.setState({
             chats: [],
             show_search: false,

@@ -44,7 +44,7 @@ class Navbar extends Component {
     render() {
         return (
             <div>
-                <nav className="navbar navbar-light bg-light">
+                <nav className="navbar navbar-light bg-light sticky-top">
                     <a className="navbar-brand" href="#">
                         <img className="logo" src={this.state.photo} width="40" height="40" alt="Profile image"/>
                     </a>

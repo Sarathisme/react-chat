@@ -51,7 +51,7 @@ class MessageList extends Component {
     render() {
         let messages;
 
-        if(this.props.chats.length === 0) {
+        if(this.props.chats === undefined) {
             messages = <ul className="message-ul"/>;
         } else {
             messages = <ul className="message-ul">
@@ -85,10 +85,36 @@ class ChatWindow extends Component {
         if(e.keyCode === 13) {
             let chats = this.state.chats;
 
-            chats.push({
+            if(chats === undefined) chats = [];
+
+            let message = {
                 id: cookies.get('id'),
                 message: e.target.value,
-                timestamp: "1"
+                timestamp: Date.now().toString()
+            };
+
+            chats.push(message);
+
+            fetch("http://localhost:9000/chat/post/messages", {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': 'Content-type'
+                },
+                body: JSON.stringify({
+                    "id": cookies.get('id'),
+                    "interlocuter": this.props.interlocuter,
+                    "message": message
+                })
+            }).then(response => {
+                if(response.statusText === 'OK') {
+                    response.json().then(response => {
+                        console.log(response);
+                    });
+                }
+            }).catch(error => {
+                console.log(error);
             });
 
             this.setState({
@@ -116,8 +142,10 @@ class ChatWindow extends Component {
             if(response.statusText === 'OK') {
                 response.json().then(response => {
                     this.setState({
-                        'chats': response.data
-                    })
+                        'chats': response.data,
+                    });
+
+                    console.log(response.data);
                 });
             }
         }).catch(error => {

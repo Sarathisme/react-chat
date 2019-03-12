@@ -102,8 +102,42 @@ app.post('/chat/get/messages', (req, res) => {
     const interlocuter = req.body.interlocuter;
     const interpolator = req.body.id;
 
-    User.find({id: interpolator, chats: {user_id: interlocuter}}, (err, messages) => {
-       res.send({"data": messages})
+    User.find({id: interpolator, chats: {user_id: interlocuter}}, (err, data) => {
+        console.log(data);
+        if(data === undefined) {
+            res.send({"data": []})
+        } else {
+            res.send({"data": data.messages})
+        }
+    });
+});
+
+app.post('/chat/post/messages', (req, res) => {
+    const interlocuter = req.body.interlocuter;
+    const interpolator = req.body.id;
+    const message = req.body.message;
+
+    User.findOne({id: interpolator, chats: {user_id : interlocuter}}, (err, user) => {
+        if(user === null) {
+            new Promise(function(resolve, reject) {
+                    User.findOne({id: interlocuter}, (err, data) => {
+                        let chat = {};
+                        chat["user_id"] = data.id;
+                        chat["name"] = data.name;
+                        chat["photo"] = data.photo;
+                        chat["messages"] = [];
+
+                        chat['messages'].push(message);
+
+                        resolve(chat);
+                    });
+                }
+            ).then(chat => {
+                User.findOneAndUpdate({id: interpolator}, {$push: {chats: chat}}, (err, user) => {
+                    res.send({"message": "success"});
+                });
+            });
+        }
     });
 });
 

@@ -4,8 +4,10 @@
     <list default="true" id="7780c8f1-7d81-4a10-b217-32efc3ec2a74" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/ChatWindow.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/ChatWindow.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/ChatWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/ChatWindow.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/Users.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/Users.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,8 +23,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/js/components/ChatWindow.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="45" column="40" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
+            <state relative-caret-position="332">
+              <caret line="97" column="32" selection-start-line="97" selection-start-column="32" selection-end-line="97" selection-end-column="32" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
                 <element signature="n#Header#0" />
@@ -32,31 +34,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="95" column="34" selection-start-line="95" selection-start-column="34" selection-end-line="95" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/js/components/Users.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="62" selection-start-line="62" selection-end-line="62" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/css/ChatWindow.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+            <state relative-caret-position="270">
+              <caret line="80" column="1" lean-forward="true" selection-start-line="80" selection-start-column="1" selection-end-line="80" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -76,6 +57,9 @@
       <find>console</find>
       <find>console.</find>
       <find>console.log</find>
+      <find>/chat</find>
+      <find>chat</find>
+      <find>this.state</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -98,12 +82,12 @@
         <option value="$PROJECT_DIR$/src/css/Users.css" />
         <option value="$PROJECT_DIR$/src/css/Dashboard.css" />
         <option value="$PROJECT_DIR$/src/css/App.css" />
-        <option value="$PROJECT_DIR$/src/css/ChatWindow.css" />
         <option value="$PROJECT_DIR$/src/js/components/Navbar.js" />
         <option value="$PROJECT_DIR$/server/models/users.js" />
+        <option value="$PROJECT_DIR$/src/js/Dashboard.js" />
         <option value="$PROJECT_DIR$/src/js/components/Users.js" />
         <option value="$PROJECT_DIR$/server/index.js" />
-        <option value="$PROJECT_DIR$/src/js/Dashboard.js" />
+        <option value="$PROJECT_DIR$/src/css/ChatWindow.css" />
         <option value="$PROJECT_DIR$/src/js/components/ChatWindow.js" />
       </list>
     </option>
@@ -241,7 +225,7 @@
       <workItem from="1551936605932" duration="21955000" />
       <workItem from="1552021131766" duration="18275000" />
       <workItem from="1552282100131" duration="23007000" />
-      <workItem from="1552366240366" duration="15392000" />
+      <workItem from="1552366240366" duration="17785000" />
     </task>
     <task id="LOCAL-00001" summary="Added Google Login.">
       <created>1551940817935</created>
@@ -299,11 +283,18 @@
       <option name="project" value="LOCAL" />
       <updated>1552385710984</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Enter key press finished. Have to retrieve existing messages and insert messages.">
+      <created>1552390057547</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1552390057547</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78629000" />
+    <option name="totallyTimeSpent" value="81022000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -363,7 +354,8 @@
     <MESSAGE value="Users search added." />
     <MESSAGE value="Chat window complete. Have to update it dynamically." />
     <MESSAGE value="Chat window complete. Search filtering made to exclude current user. Have to add sending messages." />
-    <option name="LAST_COMMIT_MESSAGE" value="Chat window complete. Search filtering made to exclude current user. Have to add sending messages." />
+    <MESSAGE value="Enter key press finished. Have to retrieve existing messages and insert messages." />
+    <option name="LAST_COMMIT_MESSAGE" value="Enter key press finished. Have to retrieve existing messages and insert messages." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/css/index.css">
@@ -448,10 +440,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/ChatWindow.css">
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+        <state relative-caret-position="221">
+          <caret line="1051" column="28" selection-start-line="1051" selection-start-column="28" selection-end-line="1051" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/components/Users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="138" column="30" lean-forward="true" selection-start-line="138" selection-start-column="30" selection-end-line="138" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/Dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="50" column="11" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="50" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="105" column="33" selection-start-line="105" selection-start-column="33" selection-end-line="105" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -462,44 +481,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
+    <entry file="file://$PROJECT_DIR$/src/css/ChatWindow.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="1051" column="28" selection-start-line="1051" selection-start-column="28" selection-end-line="1051" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="95" column="34" selection-start-line="95" selection-start-column="34" selection-end-line="95" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/Dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/components/Users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="62" selection-start-line="62" selection-end-line="62" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="270">
+          <caret line="80" column="1" lean-forward="true" selection-start-line="80" selection-start-column="1" selection-end-line="80" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/components/ChatWindow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="45" column="40" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
+        <state relative-caret-position="332">
+          <caret line="97" column="32" selection-start-line="97" selection-start-column="32" selection-end-line="97" selection-end-column="32" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
             <element signature="n#Header#0" />

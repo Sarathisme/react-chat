@@ -71,13 +71,13 @@ app.post('/get/users', (req, res) => {
     }
 });
 
-app.post('/chat/users', (req, res) => {
+app.post('/chat/get/users', (req, res) => {
     User.findOne({id: req.body.id}, (err, user) => {
         res.status(200).send({"chats": user.chats});
     });
 });
 
-app.post('/chat/user', (req, res) => {
+app.post('/chat/get/user', (req, res) => {
     const interlocutor = req.body.interlocuter;
     const interpolator = req.body.id;
 
@@ -95,6 +95,15 @@ app.post('/chat/user', (req, res) => {
         ).then(data => {
             res.send({"user": data});
         });
+    });
+});
+
+app.post('/chat/get/messages', (req, res) => {
+    const interlocuter = req.body.interlocuter;
+    const interpolator = req.body.id;
+
+    User.find({id: interpolator, chats: {user_id: interlocuter}}, (err, messages) => {
+       res.send({"data": messages})
     });
 });
 

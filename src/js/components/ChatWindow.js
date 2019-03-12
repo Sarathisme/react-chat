@@ -36,10 +36,18 @@ class Message extends Component {
           </li>
         );
     }
-
 }
 
 class MessageList extends Component {
+
+    getDirection(value) {
+        if(value === this.props.user_id) {
+            return "right";
+        } else {
+            return "left";
+        }
+    }
+
     render() {
         let messages;
 
@@ -47,9 +55,7 @@ class MessageList extends Component {
             messages = <ul className="message-ul"/>;
         } else {
             messages = <ul className="message-ul">
-                {JSON.parse(this.props.chats).map(data =>
-                    <Message id={this.props.direction} text={this.props.text} />
-                )}
+                {this.props.chats.map(data => <Message direction={this.getDirection(data.id)} text={data.message} /> )}
             </ul>;
         }
         return(
@@ -74,31 +80,69 @@ class ChatWindow extends Component {
     }
 
     onKeyPressed(e) {
-        if(e.keyCode === 13) {
+        const { cookies } = this.props;
 
+        if(e.keyCode === 13) {
+            let chats = this.state.chats;
+
+            chats.push({
+                id: cookies.get('id'),
+                message: e.target.value,
+                timestamp: "1"
+            });
+
+            this.setState({
+               chats: chats
+            });
+
+            e.target.value = "";
         }
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        console.log(nextProps.interlocuter);
+        const { cookies } = this.props;
+        fetch("http://localhost:9000/chat/get/messages", {
+            method: 'post',
+            headers: {
+                'Content-type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Content-type'
+            },
+            body: JSON.stringify({
+                "id": cookies.get('id'),
+                "interlocuter": nextProps.interlocuter
+            })
+        }).then(response => {
+            if(response.statusText === 'OK') {
+                response.json().then(response => {
+                    this.setState({
+                        'chats': response.data
+                    })
+                });
+            }
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
     render() {
-        let header;
+        const { cookies } = this.props;
 
-        if(this.props.data === undefined) {
-            header = <Header photo={'https://placeimg.com/50/50/any'} name={"John Doe"}/>;
+        if(this.props.data !== undefined) {
+            return (
+                <div className="chat-content">
+                    <Header photo={JSON.parse(this.props.data).photo} name={JSON.parse(this.props.data).name}/>
+                    <MessageList chats={this.state.chats} user_id={cookies.get('id')}/>
+                    <MessageInput onKeyDown={this.onKeyPressed}/>
+                </div>
+            );
         } else {
-            header = <Header photo={JSON.parse(this.props.data).photo} name={JSON.parse(this.props.data).name}/>
+            return (
+              <div className="chat-content">
+                  <h2 className="text-muted welcome-message">Open a chat!</h2>
+              </div>
+            );
         }
-
-        return (
-            <div className="chat-content">
-                {header}
-                <MessageList chats={this.state.chats}/>
-                <MessageInput onKeyDown={this.onKeyPressed}/>
-            </div>
-        );
     }
 }
 

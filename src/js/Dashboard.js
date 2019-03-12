@@ -26,7 +26,7 @@ class Dashboard extends Component {
     getConversation(id) {
         const { cookies } = this.props;
 
-        fetch("http://localhost:9000/chat/user", {
+        fetch("http://localhost:9000/chat/get/user", {
             method: 'post',
             headers: {
                 'Content-type': 'application/json',

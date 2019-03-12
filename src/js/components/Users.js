@@ -93,7 +93,7 @@ class Users extends Component {
     getRecentChats() {
         const { cookies } = this.props;
 
-        fetch("http://localhost:9000/chat/users", {
+        fetch("http://localhost:9000/chat/get/users", {
             method: 'post',
             headers: {
                 'Content-type': 'application/json',

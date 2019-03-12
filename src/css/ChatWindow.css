@@ -70,6 +70,12 @@ p {
     padding: 4px;
 }
 
+.welcome-message {
+    text-align: center;
+    position: relative;
+    top: 45%;
+}
+
 #left {
     text-align: start;
 }

@@ -5,17 +5,13 @@ import { withCookies } from "react-cookie";
 class List extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            "data": this.props.chats
-        };
     }
 
     render() {
         return (
             <ul className="list-group">
-                { this.state.data.map((chat, i) =>
-                    <li key={ chat.user_id } className="list-group-item d-flex justify-content-between align-items-center" onClick={this.props.onItemClick}>
+                { this.props.chats.map((chat, i) =>
+                    <li key={ chat.user_id } id={ chat.user_id } className="list-group-item d-flex justify-content-between align-items-center" onClick={this.props.onItemClick}>
                         { chat.name }
                         <span className="badge badge-primary badge-pill">{ chat.messages.length }</span>
                     </li>
@@ -39,7 +35,7 @@ class SearchResults extends Component {
             <ul className="list-group">
                 {
                     Object.values(JSON.parse(this.state.users)).map((user) =>
-                        <li key={ user.id } className="list-group-item d-flex justify-content-between align-items-center" onClick={this.props.onItemClick}>
+                        <li key={ user.id } id={ user.id } className="list-group-item d-flex justify-content-between align-items-center" onClick={this.props.onItemClick}>
                             { user.name }
                         </li>
                     )}
@@ -58,16 +54,12 @@ class Users extends Component {
             show_search: false,
         };
 
-        this.onItemClick = this.onItemClick.bind(this);
         this.onSearchChange = this.onSearchChange.bind(this);
         this.getRecentChats = this.getRecentChats.bind(this);
     }
 
-    onItemClick(e) {
-        alert("Item clicked!");
-    }
-
     onSearchChange(e) {
+        const { cookies } = this.props;
 
         if(e.target.value === '') {
             this.getRecentChats();
@@ -81,6 +73,7 @@ class Users extends Component {
                 'Access-Control-Allow-Headers': 'Content-type'
             },
             body: JSON.stringify({
+                "id": cookies.get('id'),
                 "query": e.target.value
             }),
         }).then(response => {
@@ -99,11 +92,6 @@ class Users extends Component {
 
     getRecentChats() {
         const { cookies } = this.props;
-        this.setState({
-            chats: [],
-            show_search: false,
-            results: []
-        });
 
         fetch("http://localhost:9000/chat/users", {
             method: 'post',
@@ -120,7 +108,7 @@ class Users extends Component {
                 response.json().then(data => {
                     this.setState({
                         'chats': data.chats,
-                        'count': data.chats.length
+                        'show_search': false
                     });
                 });
             }
@@ -129,7 +117,7 @@ class Users extends Component {
         });
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.getRecentChats();
     }
 
@@ -137,9 +125,9 @@ class Users extends Component {
         let list;
 
         if (!this.state.show_search) {
-            list = <List chats={this.state.chats} onItemClick={this.onItemClick}/>
+            list = <List chats={this.state.chats} onItemClick={this.props.onItemClick}/>
         } else {
-            list = <SearchResults results={JSON.stringify(this.state.results)} onItemClick={this.onItemClick}/>
+            list = <SearchResults results={JSON.stringify(this.state.results)} onItemClick={this.props.onItemClick}/>
         }
 
         return (

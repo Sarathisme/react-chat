@@ -45,9 +45,9 @@ class Navbar extends Component {
         return (
             <div>
                 <nav className="navbar navbar-light bg-light sticky-top">
-                    <a className="navbar-brand" href="#">
-                        <img className="logo" src={this.state.photo} width="40" height="40" alt="Profile image"/>
-                    </a>
+                    <div className="navbar-brand">
+                        <img className="logo" src={this.state.photo} width="40" height="40" alt="Profile"/>
+                    </div>
                     <p className="display_name">{this.state.name}</p>
                     <button className="btn btn-outline-danger btn-sm ml-auto">Logout</button>
                 </nav>

@@ -56,15 +56,14 @@ app.post('/add/user', (req, res) => {
 app.post('/get/users', (req, res) => {
     let queryCond = {};
 
-    console.log(req.body);
     const query = req.body.query;
 
     if(query){
-        queryCond.name={$regex:query,$options:"i"};
+        queryCond.name={$regex:query,$options:"i", };
     }
 
     if(query !== '') {
-        User.find(queryCond, (err, users) => {
+        User.find({ $and: [{ name: { '$regex': req.body.query, '$options': 'i' } }, { id: { $ne: req.body.id } } ]}, (err, users) => {
             res.status(200).send({"results": users});
         });
     } else {
@@ -78,6 +77,35 @@ app.post('/chat/users', (req, res) => {
     });
 });
 
+app.post('/chat/user', (req, res) => {
+    const interlocutor = req.body.interlocuter;
+    const interpolator = req.body.id;
+
+    User.find({id: interpolator}, (err, user) => {
+        if (user.chats === undefined) {
+            new Promise(function(resolve, reject) {
+                    User.findOne({id: interlocutor}, (err, data) => {
+                        let chat = {};
+                        chat["user_id"] = data.id;
+                        chat["name"] = data.name;
+                        chat["photo"] = data.photo;
+                        chat["messages"] = [];
+
+                        resolve(chat);
+                    });
+                }
+            ).then(data => {
+                res.send({"user": data});
+                // console.log(data);
+                // User.updateOne({id: interpolator}, {$push: {chats: data}}, (err, user) => {
+                //     res.send({"message": "success", "exists": "false"});
+                // });
+            });
+        } else {
+
+        }
+    });
+});
 
 mongoose.connect(DATABASE_URI, { useNewUrlParser: true }).then((value => {
     app.listen(PORT, debug=true);

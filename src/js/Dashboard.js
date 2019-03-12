@@ -41,8 +41,8 @@ class Dashboard extends Component {
             if(response.statusText === 'OK') {
                 response.json().then(data => {
                     this.setState({
-                        'interlocuter': this.props.interlocuter,
-                        'data': JSON.stringify(data)
+                        'interlocuter': id,
+                        'data': JSON.stringify(data.user),
                     });
                 });
             }
@@ -61,7 +61,7 @@ class Dashboard extends Component {
                             <Users onItemClick={this.onItemClick}/>
                         </div>
                         <div className="col-lg-9">
-                            <ChatWindow data={this.state.data} />
+                            <ChatWindow data={this.state.data} interlocuter={this.state.interlocuter} />
                         </div>
                     </div>
                 </div>

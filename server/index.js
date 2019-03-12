@@ -81,29 +81,20 @@ app.post('/chat/user', (req, res) => {
     const interlocutor = req.body.interlocuter;
     const interpolator = req.body.id;
 
-    User.find({id: interpolator}, (err, user) => {
-        if (user.chats === undefined) {
-            new Promise(function(resolve, reject) {
-                    User.findOne({id: interlocutor}, (err, data) => {
-                        let chat = {};
-                        chat["user_id"] = data.id;
-                        chat["name"] = data.name;
-                        chat["photo"] = data.photo;
-                        chat["messages"] = [];
+    User.find({id: interlocutor}, (err, user) => {
+        new Promise(function(resolve, reject) {
+                User.findOne({id: interlocutor}, (err, data) => {
+                    let chat = {};
+                    chat["user_id"] = data.id;
+                    chat["name"] = data.name;
+                    chat["photo"] = data.photo;
 
-                        resolve(chat);
-                    });
-                }
-            ).then(data => {
-                res.send({"user": data});
-                // console.log(data);
-                // User.updateOne({id: interpolator}, {$push: {chats: data}}, (err, user) => {
-                //     res.send({"message": "success", "exists": "false"});
-                // });
-            });
-        } else {
-
-        }
+                    resolve(chat);
+                });
+            }
+        ).then(data => {
+            res.send({"user": data});
+        });
     });
 });
 

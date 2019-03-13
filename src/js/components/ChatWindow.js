@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import '../../css/ChatWindow.css';
 import { withCookies } from "react-cookie";
 
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://localhost:9000');
+
 class Header extends Component {
     constructor(props) {
         super(props);
@@ -81,6 +84,8 @@ class ChatWindow extends Component {
 
     onKeyPressed(e) {
         const { cookies } = this.props;
+
+        socket.emit("chat", "hello, world");
 
         if(e.keyCode === 13) {
             let chats = this.state.chats;

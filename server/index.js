@@ -9,7 +9,10 @@ const PORT = 9000;
 const DATABASE_URI = "mongodb://root:AIzaSyDc613XSx9_lZTv7qNFCxEhwiRHRXYmCNE@ds135540.mlab.com:35540/chat";
 
 const app = express();
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
 
+io.set("origins", "*:*");
 app.use(cors());
 app.use(body_parser.json({extended: true}));
 
@@ -157,6 +160,16 @@ app.post('/chat/post/messages', (req, res) => {
     });
 });
 
+io.on("connection", async (client) => {
+    client.on("chat", (data) => {
+       console.log(data);
+    });
+});
+
+io.on("chat", (data) => {
+    console.log(data);
+});
+
 mongoose.connect(DATABASE_URI, { useNewUrlParser: true }).then((value => {
-    app.listen(PORT, debug=true);
+    server.listen(PORT, debug=true);
 }));

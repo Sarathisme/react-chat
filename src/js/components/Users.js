@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import '../../css/Users.css';
 import { withCookies } from "react-cookie";
 
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://localhost:9000');
+
 class List extends Component {
     constructor(props) {
         super(props);
@@ -56,6 +59,26 @@ class Users extends Component {
 
         this.onSearchChange = this.onSearchChange.bind(this);
         this.getRecentChats = this.getRecentChats.bind(this);
+    }
+
+    subscribeToMessage() {
+        const { cookies } = this.props;
+        socket.on(cookies.get('id'), data => {
+            const chats = this.state.chats;
+            const results = this.state.results;
+            const show_search = this.state.show_search;
+
+            chats.map((chat, i) => {
+                if(chat.id === data.id) {
+                    chats[i].chats.messages.push(data);
+                    this.setState({
+                        chats: chats,
+                        results:results,
+                        show_search: show_search
+                    });
+                }
+            });
+        });
     }
 
     onSearchChange(e) {
@@ -119,6 +142,7 @@ class Users extends Component {
 
     componentDidMount() {
         this.getRecentChats();
+        this.subscribeToMessage();
     }
 
     render() {

@@ -82,10 +82,22 @@ class ChatWindow extends Component {
         this.onKeyPressed = this.onKeyPressed.bind(this);
     }
 
+    subscribeToMessage(id, interlocuter) {
+        socket.on(id, data => {
+            if(data.id === interlocuter) {
+                const chats = this.state.chats;
+                chats.push(data);
+
+                this.setState({
+                    chats: chats
+                });
+            }
+        });
+    }
+
+
     onKeyPressed(e) {
         const { cookies } = this.props;
-
-        socket.emit("chat", "hello, world");
 
         if(e.keyCode === 13) {
             let chats = this.state.chats;
@@ -98,6 +110,7 @@ class ChatWindow extends Component {
                 timestamp: Date.now().toString()
             };
 
+            socket.emit("chat", {"interlocuter": this.props.interlocuter, "message": message});
             chats.push(message);
 
             fetch("http://localhost:9000/chat/post/messages", {
@@ -154,6 +167,8 @@ class ChatWindow extends Component {
         }).catch(error => {
             console.log(error);
         });
+
+        this.subscribeToMessage(cookies.get('id'), nextProps.interlocuter);
     }
 
     render() {

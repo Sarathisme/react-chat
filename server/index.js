@@ -149,11 +149,11 @@ app.post('/chat/post/messages', (req, res) => {
             const message = req.body.message;
 
             User.update({id: interpolator, 'chats.user_id': interlocuter }, {$push: {'chats.$.messages': message}}, (err, user) => {
-                if(err) {
-                    throw err;
-                } else {
-                    res.send({"message": "success"});
-                }
+                    if(err) {
+                        throw err;
+                    } else {
+                        res.send({"message": "success"});
+                    }
                 }
             );
         }
@@ -161,8 +161,51 @@ app.post('/chat/post/messages', (req, res) => {
 });
 
 io.on("connection", async (client) => {
-    client.on("chat", (data) => {
-       console.log(data);
+    client.on("chat", (response) => {
+        const interpolator = response.interlocuter;
+        const message = response.message;
+        const interlocuter = response.message.id;
+
+        const user = User.findOne({id: interpolator}).where("chats.user_id").equals(interlocuter);
+
+        user.exec((err, user) => {
+            if (user === null) {
+                new Promise(function (resolve, reject) {
+                        User.findOne({id: interlocuter}, (err, data) => {
+                            let chat = {};
+                            chat["user_id"] = data.id;
+                            chat["name"] = data.name;
+                            chat["photo"] = data.photo;
+                            chat["messages"] = [];
+
+                            chat['messages'].push(message);
+
+                            resolve(chat);
+                        });
+                    }
+                ).then(chat => {
+                    User.findOneAndUpdate({id: interpolator}, {$push: {chats: chat}}, (err, user) => {
+                        if (err) {
+                            throw err;
+                        } else {
+                            io.emit(interpolator, message);
+                        }
+                    });
+                });
+            } else {
+                User.update({
+                    id: interpolator,
+                    'chats.user_id': interlocuter
+                }, {$push: {'chats.$.messages': message}}, (err, user) => {
+                    if (err) {
+                        throw err;
+                    } else {
+                        console.log(typeof interpolator);
+                        io.emit(interpolator, message);
+                    }
+                });
+            }
+        });
     });
 });
 
@@ -170,6 +213,6 @@ io.on("chat", (data) => {
     console.log(data);
 });
 
-mongoose.connect(DATABASE_URI, { useNewUrlParser: true }).then((value => {
+mongoose.connect(DATABASE_URI, { useNewUrlParser: true }).then((value) => {
     server.listen(PORT, debug=true);
-}));
+});

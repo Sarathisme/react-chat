@@ -110,15 +110,15 @@ class ChatWindow extends Component {
             }).then(response => {
                 if(response.statusText === 'OK') {
                     response.json().then(response => {
-                        console.log(response);
+                        if(response.message === "success") {
+                            this.setState({
+                                chats: chats
+                            });
+                        }
                     });
                 }
             }).catch(error => {
                 console.log(error);
-            });
-
-            this.setState({
-               chats: chats
             });
 
             e.target.value = "";

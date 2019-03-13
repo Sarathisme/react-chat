@@ -103,8 +103,8 @@ app.post('/chat/get/messages', (req, res) => {
     const interpolator = req.body.id;
 
     User.findOne({id: interpolator}).where("chats.user_id").equals(interlocuter).exec((err, data) => {
-        console.log(data.chats[0].messages);
-        if(data === undefined) {
+        console.log(data);
+        if(data === null) {
             res.send({"data": []})
         } else {
             res.send({"data": data.chats[0].messages})
@@ -117,7 +117,9 @@ app.post('/chat/post/messages', (req, res) => {
     const interpolator = req.body.id;
     const message = req.body.message;
 
-    User.findOne({id: interpolator, chats: {user_id : interlocuter}}, (err, user) => {
+    const user = User.findOne({id: interpolator}).where("chats.user_id").equals(interlocuter);
+
+    user.exec((err, user) => {
         if(user === null) {
             new Promise(function(resolve, reject) {
                     User.findOne({id: interlocuter}, (err, data) => {
@@ -134,8 +136,21 @@ app.post('/chat/post/messages', (req, res) => {
                 }
             ).then(chat => {
                 User.findOneAndUpdate({id: interpolator}, {$push: {chats: chat}}, (err, user) => {
-                    res.send({"message": "success"});
+                    if(err) {
+                        throw err;
+                    } else {
+                        res.send({"message": "success"});
+                    }
                 });
+            });
+        } else {
+            User.findOneAndUpdate({ id: interpolator },  { chats: { user_id: interlocuter }}, (err, user) => {
+                console.log(user);
+                if(err) {
+                    throw err;
+                } else {
+                    res.send({"message": "success"});
+                }
             });
         }
     });

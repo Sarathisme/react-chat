@@ -103,7 +103,6 @@ app.post('/chat/get/messages', (req, res) => {
     const interpolator = req.body.id;
 
     User.findOne({id: interpolator}).where("chats.user_id").equals(interlocuter).exec((err, data) => {
-        console.log(data);
         if(data === null) {
             res.send({"data": []})
         } else {
@@ -144,14 +143,16 @@ app.post('/chat/post/messages', (req, res) => {
                 });
             });
         } else {
-            User.findOneAndUpdate({ id: interpolator },  { chats: { user_id: interlocuter }}, (err, user) => {
-                console.log(user);
+            const message = req.body.message;
+
+            User.update({id: interpolator, 'chats.user_id': interlocuter }, {$push: {'chats.$.messages': message}}, (err, user) => {
                 if(err) {
                     throw err;
                 } else {
                     res.send({"message": "success"});
                 }
-            });
+                }
+            );
         }
     });
 });

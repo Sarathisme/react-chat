@@ -102,12 +102,12 @@ app.post('/chat/get/messages', (req, res) => {
     const interlocuter = req.body.interlocuter;
     const interpolator = req.body.id;
 
-    User.find({id: interpolator, chats: {user_id: interlocuter}}, (err, data) => {
-        console.log(data);
+    User.findOne({id: interpolator}).where("chats.user_id").equals(interlocuter).exec((err, data) => {
+        console.log(data.chats[0].messages);
         if(data === undefined) {
             res.send({"data": []})
         } else {
-            res.send({"data": data.messages})
+            res.send({"data": data.chats[0].messages})
         }
     });
 });

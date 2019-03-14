@@ -56,7 +56,10 @@ class Navbar extends Component {
     }
 
     render() {
+        const { cookies } = this.props;
+
         if(this.state.logout) {
+            cookies.remove('id');
             return (
                 <Redirect to={
                     {

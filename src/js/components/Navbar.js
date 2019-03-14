@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../../css/Navbar.css';
 import { withCookies } from "react-cookie";
+import { GoogleLogout } from 'react-google-login';
+import {Redirect} from "react-router-dom";
 
 class Navbar extends Component {
     constructor(props) {
@@ -8,11 +10,23 @@ class Navbar extends Component {
 
         this.state = {
             photo: "https://placeimg.com/640/480/any",
-            name: "John Doe"
+            name: "John Doe",
+            logout: false
         };
+
+        this.logout = this.logout.bind(this);
+    }
+
+    logout() {
+        this.setState({
+            photo: this.state.photo,
+            name: this.state.name,
+            logout: true
+        })
     }
 
     componentDidMount() {
+
         const { cookies } = this.props;
 
         fetch('http://localhost:9000/user', {
@@ -42,17 +56,31 @@ class Navbar extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <nav className="navbar navbar-light bg-light sticky-top">
-                    <div className="navbar-brand">
-                        <img className="logo" src={this.state.photo} width="40" height="40" alt="Profile"/>
-                    </div>
-                    <p className="display_name">{this.state.name}</p>
-                    <button className="btn btn-outline-danger btn-sm ml-auto">Logout</button>
-                </nav>
-            </div>
-        );
+        if(this.state.logout) {
+            return (
+                <Redirect to={
+                    {
+                        pathname: "/",
+                        data: this.state.data,
+                    }
+                }/>
+            )
+        }else {
+            return (
+                <div>
+                    <nav className="navbar navbar-light bg-light sticky-top">
+                        <div className="navbar-brand">
+                            <img className="logo" src={this.state.photo} width="40" height="40" alt="Profile"/>
+                        </div>
+                        <p className="display_name mr-auto">{this.state.name}</p>
+                        <GoogleLogout
+                            buttonText="Logout"
+                            onLogoutSuccess={this.logout}>
+                        </GoogleLogout>
+                    </nav>
+                </div>
+            );
+        }
     }
 }
 

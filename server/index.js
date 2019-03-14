@@ -9,7 +9,7 @@ const PORT = 9000;
 const DATABASE_URI = "mongodb://root:AIzaSyDc613XSx9_lZTv7qNFCxEhwiRHRXYmCNE@ds135540.mlab.com:35540/chat";
 
 const app = express();
-const server = require("http").createServer(app);
+const server = require("https").createServer(app);
 const io = require("socket.io")(server);
 
 io.set("origins", "*:*");
@@ -105,7 +105,7 @@ app.post('/chat/get/messages', (req, res) => {
     const interlocuter = req.body.interlocuter;
     const interpolator = req.body.id;
 
-    User.findOne({id: interpolator}).where("chats.user_id").equals(interlocuter).exec((err, data) => {
+    User.findOne({id: interpolator}).where("chats.user_id").equals(interlocuter).select("chats.$.messages").exec((err, data) => {
         if(data === null) {
             res.send({"data": []})
         } else {
@@ -188,6 +188,7 @@ io.on("connection", async (client) => {
                         if (err) {
                             throw err;
                         } else {
+                            console.log(interpolator);
                             io.emit(interpolator, message);
                         }
                     });
@@ -200,7 +201,7 @@ io.on("connection", async (client) => {
                     if (err) {
                         throw err;
                     } else {
-                        console.log(typeof interpolator);
+                        console.log(interpolator);
                         io.emit(interpolator, message);
                     }
                 });
@@ -209,9 +210,6 @@ io.on("connection", async (client) => {
     });
 });
 
-io.on("chat", (data) => {
-    console.log(data);
-});
 
 mongoose.connect(DATABASE_URI, { useNewUrlParser: true }).then((value) => {
     server.listen(PORT, debug=true);

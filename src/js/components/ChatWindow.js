@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import '../../css/ChatWindow.css';
 import { withCookies } from "react-cookie";
 
-import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:9000');
+import io from 'socket.io-client';
+const socket = io("http://localhost:9000");
 
 class Header extends Component {
     constructor(props) {
@@ -22,7 +22,6 @@ class Header extends Component {
                 </div>
                 <p className="profile-name">{this.props.name}</p>
             </div>
-
         );
     }
 }
@@ -95,7 +94,6 @@ class ChatWindow extends Component {
         });
     }
 
-
     onKeyPressed(e) {
         const { cookies } = this.props;
 
@@ -110,7 +108,6 @@ class ChatWindow extends Component {
                 timestamp: Date.now().toString()
             };
 
-            socket.emit("chat", {"interlocuter": this.props.interlocuter, "message": message});
             chats.push(message);
 
             fetch("http://localhost:9000/chat/post/messages", {
@@ -132,6 +129,7 @@ class ChatWindow extends Component {
                             this.setState({
                                 chats: chats
                             });
+                            socket.emit("chat", {"interlocuter": this.props.interlocuter, "message": message});
                         }
                     });
                 }
@@ -159,6 +157,7 @@ class ChatWindow extends Component {
         }).then(response => {
             if(response.statusText === 'OK') {
                 response.json().then(response => {
+                    console.log(response.data);
                     this.setState({
                         'chats': response.data,
                     });

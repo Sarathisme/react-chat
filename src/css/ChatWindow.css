@@ -57,7 +57,10 @@ p {
     max-height: 580px;
 
     margin-top: 64px;
+    margin-bottom: 64px;
     overflow-y: scroll;
+
+    bottom: 0;
     position: absolute;
 }
 

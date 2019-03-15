@@ -19,7 +19,7 @@ class Dashboard extends Component {
         this.getConversation = this.getConversation.bind(this);
     }
 
-    scrollToMyRef = () =>   this.myRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    scrollToMyRef = () =>   this.myRef.current.scrollIntoView({ behavior: "smooth" });
 
     onItemClick(event) {
         const id = event.target.id;

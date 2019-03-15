@@ -29,11 +29,21 @@ class Header extends Component {
 }
 
 class Message extends Component {
+
+    componentDidMount() {
+        this.props.scrollToMyRef();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.props.scrollToMyRef();
+    }
+
     render() {
         return (
             <div className="message-li">
                   <div className="message-text" id={this.props.direction}>
                       {this.props.text}
+                      <div ref={this.props.myRef} />
                   </div>
             </div>
         );
@@ -44,14 +54,6 @@ class MessageList extends Component {
 
     constructor(props) {
         super(props);
-    }
-
-    componentDidMount() {
-        this.props.scrollToMyRef();
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        this.props.scrollToMyRef();
     }
 
     getDirection(value) {
@@ -69,13 +71,12 @@ class MessageList extends Component {
             messages = <div className="message-ul"/>;
         } else {
             messages = <div className="message-ul">
-                {this.props.chats.map(data => <Message direction={this.getDirection(data.id)} text={data.message} /> )}
+                {this.props.chats.map(data => <Message direction={this.getDirection(data.id)} text={data.message} scrollToMyRef={this.props.scrollToMyRef} myRef={this.props.myRef}/> )}
             </div>;
         }
         return(
             <div className="messages">
                 {messages}
-                <div ref={this.props.myRef} />
             </div>
         );
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../../css/ChatWindow.css';
 import { withCookies } from "react-cookie";
+import ScrollToBottom from 'react-scroll-to-bottom';
 
 import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:9000');
@@ -43,6 +44,21 @@ class Message extends Component {
 
 class MessageList extends Component {
 
+    constructor(props) {
+        super(props);
+        this.myRef = React.createRef()   // Create a ref object
+    }
+
+    scrollToMyRef = () =>   this.myRef.current.scrollIntoView({ behavior: "smooth" });
+
+    componentDidMount() {
+        this.scrollToMyRef();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.scrollToMyRef();
+    }
+
     getDirection(value) {
         if(value === this.props.user_id) {
             return "right";
@@ -62,7 +78,7 @@ class MessageList extends Component {
             </ul>;
         }
         return(
-            <div className="messages">
+            <div className="messages" ref={this.myRef}>
                 {messages}
             </div>
         );

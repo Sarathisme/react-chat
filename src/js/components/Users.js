@@ -69,13 +69,15 @@ class Users extends Component {
             const show_search = this.state.show_search;
 
             chats.map((chat, i) => {
-                if(chat.id === data.id) {
-                    chats[i].chats.messages.push(data);
+                if(chat.user_id === data.id) {
+                    chats[i].messages.push(data);
+                    console.log(this.state.chats);
                     this.setState({
                         chats: chats,
                         results:results,
                         show_search: show_search
                     });
+                    console.log(this.state.chats);
                 }
             });
         });

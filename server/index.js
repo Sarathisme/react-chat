@@ -191,7 +191,7 @@ io.on("connection", async (client) => {
                         if (err) {
                             throw err;
                         } else {
-                            io.emit(interpolator, message);
+                            io.to(interpolator).emit(message);
                         }
                     });
                 });
@@ -204,7 +204,7 @@ io.on("connection", async (client) => {
                         throw err;
                     } else {
                         console.log(typeof interpolator);
-                        io.emit(interpolator, message);
+                        io.to(interpolator).emit(message);
                     }
                 });
             }

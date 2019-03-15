@@ -85,7 +85,6 @@ app.post('/chat/get/users', (req, res) => {
 
 app.post('/chat/get/user', (req, res) => {
     const interlocutor = req.body.interlocutor;
-    const interpolator = req.body.id;
 
     User.find({id: interlocutor}, (err, user) => {
         new Promise(function(resolve, reject) {
@@ -191,7 +190,8 @@ io.on("connection", async (client) => {
                         if (err) {
                             throw err;
                         } else {
-                            io.to(interpolator).emit(message);
+                            console.log(interpolator, message);
+                            io.emit(interpolator, message);
                         }
                     });
                 });
@@ -203,8 +203,8 @@ io.on("connection", async (client) => {
                     if (err) {
                         throw err;
                     } else {
-                        console.log(typeof interpolator);
-                        io.to(interpolator).emit(message);
+                        console.log(interpolator, message);
+                        io.emit(interpolator, message);
                     }
                 });
             }

@@ -46,17 +46,14 @@ class MessageList extends Component {
 
     constructor(props) {
         super(props);
-        this.myRef = React.createRef()   // Create a ref object
     }
 
-    scrollToMyRef = () =>   this.myRef.current.scrollIntoView({ behavior: "smooth" });
-
     componentDidMount() {
-        this.scrollToMyRef();
+        this.props.scrollToMyRef();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        this.scrollToMyRef();
+        this.props.scrollToMyRef();
     }
 
     getDirection(value) {
@@ -78,7 +75,7 @@ class MessageList extends Component {
             </ul>;
         }
         return(
-            <div className="messages" ref={this.myRef}>
+            <div className="messages" ref={this.props.myRef}>
                 {messages}
             </div>
         );
@@ -95,12 +92,15 @@ class ChatWindow extends Component {
             'chats': []
         };
 
+        const { cookies } = this.props;
+        this.subscribeToMessage(cookies.get('id'));
+        this.myRef = React.createRef();   // Create a ref object
         this.onKeyPressed = this.onKeyPressed.bind(this);
     }
 
-    subscribeToMessage(id, interlocutor) {
+    subscribeToMessage(id) {
         socket.on(id, data => {
-            if(data.id === interlocutor) {
+            if(data.id === this.props.interlocutor) {
                 const chats = this.state.chats;
                 chats.push(data);
 
@@ -111,6 +111,7 @@ class ChatWindow extends Component {
         });
     }
 
+    scrollToMyRef = () =>   this.myRef.current.scrollIntoView({ behavior: "smooth" });
 
     onKeyPressed(e) {
         const { cookies } = this.props;
@@ -161,6 +162,7 @@ class ChatWindow extends Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         const { cookies } = this.props;
+
         fetch("http://localhost:9000/chat/get/messages", {
             method: 'post',
             headers: {
@@ -183,8 +185,6 @@ class ChatWindow extends Component {
         }).catch(error => {
             console.log(error);
         });
-
-        this.subscribeToMessage(cookies.get('id'), nextProps.interlocutor);
     }
 
     render() {
@@ -194,7 +194,7 @@ class ChatWindow extends Component {
             return (
                 <div className="chat-content">
                     <Header photo={JSON.parse(this.props.data).photo} name={JSON.parse(this.props.data).name}/>
-                    <MessageList chats={this.state.chats} user_id={cookies.get('id')}/>
+                    <MessageList chats={this.state.chats} user_id={cookies.get('id')} myRef={this.myRef} scrollToMyRef={this.scrollToMyRef}/>
                     <MessageInput onKeyDown={this.onKeyPressed}/>
                 </div>
             );

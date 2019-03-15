@@ -31,13 +31,11 @@ class Header extends Component {
 class Message extends Component {
     render() {
         return (
-          <li className="message-li">
-              <div className="message-li-div" id={this.props.direction}>
-                  <span className="message-text">
+            <div className="message-li">
+                  <div className="message-text" id={this.props.direction}>
                       {this.props.text}
-                  </span>
-              </div>
-          </li>
+                  </div>
+            </div>
         );
     }
 }
@@ -68,15 +66,16 @@ class MessageList extends Component {
         let messages;
 
         if(this.props.chats === undefined) {
-            messages = <ul className="message-ul"/>;
+            messages = <div className="message-ul"/>;
         } else {
-            messages = <ul className="message-ul">
+            messages = <div className="message-ul">
                 {this.props.chats.map(data => <Message direction={this.getDirection(data.id)} text={data.message} /> )}
-            </ul>;
+            </div>;
         }
         return(
-            <div className="messages" ref={this.props.myRef}>
+            <div className="messages">
                 {messages}
+                <div ref={this.props.myRef} />
             </div>
         );
     }
@@ -94,7 +93,6 @@ class ChatWindow extends Component {
 
         const { cookies } = this.props;
         this.subscribeToMessage(cookies.get('id'));
-        this.myRef = React.createRef();   // Create a ref object
         this.onKeyPressed = this.onKeyPressed.bind(this);
     }
 
@@ -110,8 +108,6 @@ class ChatWindow extends Component {
             }
         });
     }
-
-    scrollToMyRef = () =>   this.myRef.current.scrollIntoView({ behavior: "smooth" });
 
     onKeyPressed(e) {
         const { cookies } = this.props;
@@ -194,15 +190,15 @@ class ChatWindow extends Component {
             return (
                 <div className="chat-content">
                     <Header photo={JSON.parse(this.props.data).photo} name={JSON.parse(this.props.data).name}/>
-                    <MessageList chats={this.state.chats} user_id={cookies.get('id')} myRef={this.myRef} scrollToMyRef={this.scrollToMyRef}/>
+                    <MessageList chats={this.state.chats} user_id={cookies.get('id')} myRef={this.props.myRef} scrollToMyRef={this.props.scrollToMyRef}/>
                     <MessageInput onKeyDown={this.onKeyPressed}/>
                 </div>
             );
         } else {
             return (
-              <div className="chat-content">
-                  <h2 className="text-muted welcome-message">Open a chat!</h2>
-              </div>
+                <div className="chat-content">
+                    <h2 className="text-muted welcome-message">Open a chat!</h2>
+                </div>
             );
         }
     }

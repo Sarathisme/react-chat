@@ -14,9 +14,12 @@ class Dashboard extends Component {
           'interlocutor': ''
         };
 
+        this.myRef = React.createRef();   // Create a ref object
         this.onItemClick = this.onItemClick.bind(this);
         this.getConversation = this.getConversation.bind(this);
     }
+
+    scrollToMyRef = () =>   this.myRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
 
     onItemClick(event) {
         const id = event.target.id;
@@ -61,7 +64,7 @@ class Dashboard extends Component {
                             <Users onItemClick={this.onItemClick}/>
                         </div>
                         <div className="col-lg-9">
-                            <ChatWindow data={this.state.data} interlocutor={this.state.interlocutor} />
+                            <ChatWindow myRef={this.myRef} data={this.state.data} interlocutor={this.state.interlocutor} scrollToMyRef={this.scrollToMyRef} />
                         </div>
                     </div>
                 </div>

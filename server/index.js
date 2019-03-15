@@ -30,6 +30,9 @@ app.post('/user', (req, res) => {
 });
 
 app.post('/add/user', (req, res) => {
+
+    console.log(req.body);
+
     let newUser = new User({
         id: req.body.id,
         name: req.body.name,
@@ -105,7 +108,7 @@ app.post('/chat/get/messages', (req, res) => {
     const interlocuter = req.body.interlocuter;
     const interpolator = req.body.id;
 
-    User.findOne({id: interpolator}).where("chats.user_id").equals(interlocuter).exec((err, data) => {
+    User.findOne({id: interpolator}).where("chats.user_id").equals(interlocuter).select("chats.$.user_id").exec((err, data) => {
         if(data === null) {
             res.send({"data": []})
         } else {

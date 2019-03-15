@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7780c8f1-7d81-4a10-b217-32efc3ec2a74" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/ChatWindow.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/ChatWindow.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/ChatWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/ChatWindow.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,16 +22,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/components/ChatWindow.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="55">
-              <caret line="147" column="40" selection-start-line="147" selection-start-column="40" selection-end-line="147" selection-end-column="40" />
+            <state relative-caret-position="-1544">
+              <caret line="59" column="37" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
                 <element signature="n#Header#0" />
                 <element signature="n#Message#0" />
-                <element signature="n#MessageList#0" />
-                <element signature="n#!!block;n#render#0;n#ChatWindow#0" />
                 <element signature="n#MessageInput#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/css/ChatWindow.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="440">
+              <caret line="71" column="19" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -37,8 +46,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/Dashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="28" column="19" lean-forward="true" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+            <state relative-caret-position="659">
+              <caret line="63" column="100" selection-start-line="63" selection-start-column="100" selection-end-line="63" selection-end-column="100" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -49,7 +58,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/components/Navbar.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
+            <state relative-caret-position="228">
               <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -61,7 +70,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-55">
+            <state relative-caret-position="-112">
               <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -73,7 +82,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/components/Users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1095">
+            <state relative-caret-position="420">
               <caret line="77" column="23" selection-start-line="77" selection-start-column="23" selection-end-line="77" selection-end-column="23" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -82,11 +91,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="111" selection-start-line="111" selection-end-line="111" />
+            <state relative-caret-position="1545">
+              <caret line="200" column="49" selection-start-line="200" selection-start-column="49" selection-end-line="200" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -110,7 +119,11 @@
       <find>this.state</find>
       <find>console.log</find>
       <find>chats</find>
+      <find>interlocuter</find>
     </findStrings>
+    <replaceStrings>
+      <replace>interlocutor</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -133,15 +146,15 @@
         <option value="$PROJECT_DIR$/src/css/Dashboard.css" />
         <option value="$PROJECT_DIR$/src/css/App.css" />
         <option value="$PROJECT_DIR$/server/models/users.js" />
-        <option value="$PROJECT_DIR$/src/css/ChatWindow.css" />
         <option value="$PROJECT_DIR$/src/js/helpers/listener.js" />
         <option value="$PROJECT_DIR$/src/js/helpers/Listener.js" />
-        <option value="$PROJECT_DIR$/src/js/components/ChatWindow.js" />
         <option value="$PROJECT_DIR$/src/js/components/Users.js" />
-        <option value="$PROJECT_DIR$/src/js/Dashboard.js" />
         <option value="$PROJECT_DIR$/src/js/components/Navbar.js" />
         <option value="$PROJECT_DIR$/server/package.json" />
         <option value="$PROJECT_DIR$/server/index.js" />
+        <option value="$PROJECT_DIR$/src/js/Dashboard.js" />
+        <option value="$PROJECT_DIR$/src/js/components/ChatWindow.js" />
+        <option value="$PROJECT_DIR$/src/css/ChatWindow.css" />
       </list>
     </option>
   </component>
@@ -288,7 +301,7 @@
       <workItem from="1552366240366" duration="21942000" />
       <workItem from="1552449955630" duration="15595000" />
       <workItem from="1552563317591" duration="966000" />
-      <workItem from="1552625055732" duration="849000" />
+      <workItem from="1552625055732" duration="2836000" />
     </task>
     <task id="LOCAL-00001" summary="Added Google Login.">
       <created>1551940817935</created>
@@ -409,11 +422,18 @@
       <option name="project" value="LOCAL" />
       <updated>1552535750405</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Query for get messages changed.">
+      <created>1552626648470</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1552626648471</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102589000" />
+    <option name="totallyTimeSpent" value="104576000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -482,7 +502,8 @@
     <MESSAGE value="Socket io setup complete." />
     <MESSAGE value="Added Socket io. Have to test. ChatWindow working properly." />
     <MESSAGE value="Finished adding logout button." />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished adding logout button." />
+    <MESSAGE value="Query for get messages changed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Query for get messages changed." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/css/index.css">
@@ -544,13 +565,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/ChatWindow.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
-          <caret line="80" column="1" selection-start-line="80" selection-start-column="1" selection-end-line="80" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -582,19 +596,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/components/Navbar.js">
+    <entry file="file://$PROJECT_DIR$/server/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1545">
+          <caret line="200" column="49" selection-start-line="200" selection-start-column="49" selection-end-line="200" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/components/Users.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1095">
+        <state relative-caret-position="420">
           <caret line="77" column="23" selection-start-line="77" selection-start-column="23" selection-end-line="77" selection-end-column="23" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
@@ -604,8 +615,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-55">
+        <state relative-caret-position="-112">
           <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/components/Navbar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -614,8 +635,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/Dashboard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="28" column="19" lean-forward="true" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+        <state relative-caret-position="659">
+          <caret line="63" column="100" selection-start-line="63" selection-start-column="100" selection-end-line="63" selection-end-column="100" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -624,23 +645,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/components/ChatWindow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="147" column="40" selection-start-line="147" selection-start-column="40" selection-end-line="147" selection-end-column="40" />
+        <state relative-caret-position="-1544">
+          <caret line="59" column="37" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
             <element signature="n#Header#0" />
             <element signature="n#Message#0" />
-            <element signature="n#MessageList#0" />
-            <element signature="n#!!block;n#render#0;n#ChatWindow#0" />
             <element signature="n#MessageInput#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/index.js">
+    <entry file="file://$PROJECT_DIR$/src/css/ChatWindow.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="111" selection-start-line="111" selection-end-line="111" />
+        <state relative-caret-position="440">
+          <caret line="71" column="19" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="19" />
         </state>
       </provider>
     </entry>

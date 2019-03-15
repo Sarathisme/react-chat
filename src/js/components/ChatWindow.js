@@ -74,7 +74,7 @@ class ChatWindow extends Component {
         super(props);
 
         this.state = {
-            'interlocuter': this.props.interlocuter,
+            'interlocutor': this.props.interlocutor,
             'data': '',
             'chats': []
         };
@@ -82,9 +82,9 @@ class ChatWindow extends Component {
         this.onKeyPressed = this.onKeyPressed.bind(this);
     }
 
-    subscribeToMessage(id, interlocuter) {
+    subscribeToMessage(id, interlocutor) {
         socket.on(id, data => {
-            if(data.id === interlocuter) {
+            if(data.id === interlocutor) {
                 const chats = this.state.chats;
                 chats.push(data);
 
@@ -110,7 +110,7 @@ class ChatWindow extends Component {
                 timestamp: Date.now().toString()
             };
 
-            socket.emit("chat", {"interlocuter": this.props.interlocuter, "message": message});
+            socket.emit("chat", {"interlocutor": this.props.interlocutor, "message": message});
             chats.push(message);
 
             fetch("http://localhost:9000/chat/post/messages", {
@@ -122,7 +122,7 @@ class ChatWindow extends Component {
                 },
                 body: JSON.stringify({
                     "id": cookies.get('id'),
-                    "interlocuter": this.props.interlocuter,
+                    "interlocutor": this.props.interlocutor,
                     "message": message
                 })
             }).then(response => {
@@ -154,7 +154,7 @@ class ChatWindow extends Component {
             },
             body: JSON.stringify({
                 "id": cookies.get('id'),
-                "interlocuter": nextProps.interlocuter
+                "interlocutor": nextProps.interlocutor
             })
         }).then(response => {
             if(response.statusText === 'OK') {
@@ -168,7 +168,7 @@ class ChatWindow extends Component {
             console.log(error);
         });
 
-        this.subscribeToMessage(cookies.get('id'), nextProps.interlocuter);
+        this.subscribeToMessage(cookies.get('id'), nextProps.interlocutor);
     }
 
     render() {

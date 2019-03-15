@@ -11,7 +11,7 @@ class Dashboard extends Component {
         super(props);
 
         this.state = {
-          'interlocuter': ''
+          'interlocutor': ''
         };
 
         this.onItemClick = this.onItemClick.bind(this);
@@ -35,13 +35,13 @@ class Dashboard extends Component {
             },
             body: JSON.stringify({
                 "id": cookies.get('id'),
-                "interlocuter": id
+                "interlocutor": id
             })
         }).then(response => {
             if(response.statusText === 'OK') {
                 response.json().then(data => {
                     this.setState({
-                        'interlocuter': id,
+                        'interlocutor': id,
                         'data': JSON.stringify(data.user),
                     });
                 });
@@ -61,7 +61,7 @@ class Dashboard extends Component {
                             <Users onItemClick={this.onItemClick}/>
                         </div>
                         <div className="col-lg-9">
-                            <ChatWindow data={this.state.data} interlocuter={this.state.interlocuter} />
+                            <ChatWindow data={this.state.data} interlocutor={this.state.interlocutor} />
                         </div>
                     </div>
                 </div>

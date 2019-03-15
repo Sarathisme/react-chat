@@ -4,7 +4,6 @@
     <list default="true" id="7780c8f1-7d81-4a10-b217-32efc3ec2a74" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/ChatWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/ChatWindow.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/components/ChatWindow.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="73" column="153" selection-start-line="73" selection-start-column="153" selection-end-line="73" selection-end-column="153" />
+            <state relative-caret-position="240">
+              <caret line="36" column="38" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
                 <element signature="n#Header#0" />
@@ -40,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/js/Dashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="273">
+              <caret line="24" column="34" lean-forward="true" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -153,8 +152,8 @@
         <option value="$PROJECT_DIR$/src/css/Dashboard.css" />
         <option value="$PROJECT_DIR$/src/js/components/Users.js" />
         <option value="$PROJECT_DIR$/src/css/ChatWindow.css" />
-        <option value="$PROJECT_DIR$/src/js/Dashboard.js" />
         <option value="$PROJECT_DIR$/src/js/components/ChatWindow.js" />
+        <option value="$PROJECT_DIR$/src/js/Dashboard.js" />
       </list>
     </option>
   </component>
@@ -302,7 +301,7 @@
       <workItem from="1552366240366" duration="21942000" />
       <workItem from="1552449955630" duration="15595000" />
       <workItem from="1552563317591" duration="966000" />
-      <workItem from="1552625055732" duration="15922000" />
+      <workItem from="1552625055732" duration="16252000" />
     </task>
     <task id="LOCAL-00001" summary="Added Google Login.">
       <created>1551940817935</created>
@@ -472,11 +471,18 @@
       <option name="project" value="LOCAL" />
       <updated>1552655220838</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Scrolling problem resolved.">
+      <created>1552655752640</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1552655752640</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117662000" />
+    <option name="totallyTimeSpent" value="117992000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -552,7 +558,8 @@
     <MESSAGE value="Have to set the message window to be scrolled to the bottom." />
     <MESSAGE value="Non - existing user messages, current user notified." />
     <MESSAGE value="Changed list position to bottom." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed list position to bottom." />
+    <MESSAGE value="Scrolling problem resolved." />
+    <option name="LAST_COMMIT_MESSAGE" value="Scrolling problem resolved." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/css/index.css">
@@ -696,24 +703,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/Dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/components/ChatWindow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="73" column="153" selection-start-line="73" selection-start-column="153" selection-end-line="73" selection-end-column="153" />
+        <state relative-caret-position="240">
+          <caret line="36" column="38" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
             <element signature="n#Header#0" />
             <element signature="n#MessageInput#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/Dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="24" column="34" lean-forward="true" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>

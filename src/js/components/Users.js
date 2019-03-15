@@ -68,8 +68,10 @@ class Users extends Component {
             const results = this.state.results;
             const show_search = this.state.show_search;
 
+            let flag = false;
             chats.map((chat, i) => {
                 if(chat.user_id === data.id) {
+                    flag = true;
                     chats[i].messages.push(data);
                     console.log(this.state.chats);
                     this.setState({
@@ -80,6 +82,10 @@ class Users extends Component {
                     console.log(this.state.chats);
                 }
             });
+
+            if(!flag) {
+                this.getRecentChats();
+            }
         });
     }
 

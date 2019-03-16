@@ -11,12 +11,15 @@ class Dashboard extends Component {
         super(props);
 
         this.state = {
-          'interlocuter': ''
+          'interlocutor': ''
         };
 
+        this.myRef = React.createRef();   // Create a ref object
         this.onItemClick = this.onItemClick.bind(this);
         this.getConversation = this.getConversation.bind(this);
     }
+
+    scrollToMyRef = () =>   this.myRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
 
     onItemClick(event) {
         const id = event.target.id;
@@ -35,13 +38,13 @@ class Dashboard extends Component {
             },
             body: JSON.stringify({
                 "id": cookies.get('id'),
-                "interlocuter": id
+                "interlocutor": id
             })
         }).then(response => {
             if(response.statusText === 'OK') {
                 response.json().then(data => {
                     this.setState({
-                        'interlocuter': id,
+                        'interlocutor': id,
                         'data': JSON.stringify(data.user),
                     });
                 });
@@ -61,7 +64,7 @@ class Dashboard extends Component {
                             <Users onItemClick={this.onItemClick}/>
                         </div>
                         <div className="col-lg-9">
-                            <ChatWindow data={this.state.data} interlocuter={this.state.interlocuter} />
+                            <ChatWindow myRef={this.myRef} data={this.state.data} interlocutor={this.state.interlocutor} scrollToMyRef={this.scrollToMyRef} />
                         </div>
                     </div>
                 </div>

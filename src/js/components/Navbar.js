@@ -4,6 +4,8 @@ import { withCookies } from "react-cookie";
 import { GoogleLogout } from 'react-google-login';
 import {Redirect} from "react-router-dom";
 
+import {API_URL} from "../../config";
+
 class Navbar extends Component {
     constructor(props) {
         super(props);
@@ -11,10 +13,12 @@ class Navbar extends Component {
         this.state = {
             photo: "https://placeimg.com/640/480/any",
             name: "John Doe",
-            logout: false
+            logout: false,
+            load: true
         };
 
         this.logout = this.logout.bind(this);
+        this.loadProfile = this.loadProfile.bind(this);
     }
 
     logout() {
@@ -25,11 +29,11 @@ class Navbar extends Component {
         })
     }
 
-    componentDidMount() {
+    loadProfile() {
 
         const { cookies } = this.props;
 
-        fetch('http://localhost:9000/user', {
+        fetch(`${API_URL}user`, {
             method: 'post',
             headers: {
                 'Content-type': 'application/json',
@@ -44,7 +48,8 @@ class Navbar extends Component {
                 response.json().then((data) => {
                     this.setState({
                         photo: data['photo'],
-                        name: data['name']
+                        name: data['name'],
+                        load: false
                     });
                 });
             } else {
@@ -57,6 +62,10 @@ class Navbar extends Component {
 
     render() {
         const { cookies } = this.props;
+
+        if(this.state.load) {
+            this.loadProfile();
+        }
 
         if(this.state.logout) {
             cookies.remove('id');

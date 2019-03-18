@@ -1,9 +1,8 @@
 {
-<<<<<<< HEAD
   "name": "server",
   "version": "1.0.0",
   "description": "Backend for the React App",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,46 +14,9 @@
     "express": "^4.16.4",
     "mongoose": "^5.4.17",
     "nodemon": "^1.18.10",
+    "opennode": "^1.0.3",
+    "openode": "^1.9.8",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0"
   }
-=======
-  "name": "chat",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@progress/kendo-react-buttons": "^2.7.1",
-    "@progress/kendo-react-conversational-ui": "^2.7.1",
-    "@progress/kendo-react-intl": "^2.7.1",
-    "cors": "^2.8.5",
-    "mongoose": "^5.4.19",
-    "react": "^16.8.4",
-    "react-chat-elements": "^10.3.0",
-    "react-cookie": "^3.0.8",
-    "react-dom": "^16.8.4",
-    "react-google-login": "^5.0.2",
-    "react-native-vector-icons": "^6.3.0",
-    "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.8",
-    "socket.io": "^2.2.0",
-    "socket.io-client": "^2.2.0",
-    "uws": "^10.148.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
->>>>>>> temporary
 }

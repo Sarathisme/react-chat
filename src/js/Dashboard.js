@@ -5,6 +5,8 @@ import ChatWindow from './components/ChatWindow';
 import '../css/Dashboard.css';
 import { withCookies } from "react-cookie";
 
+import {API_URL} from "../config";
+
 class Dashboard extends Component {
 
     constructor(props) {
@@ -16,20 +18,19 @@ class Dashboard extends Component {
 
         this.myRef = React.createRef();   // Create a ref object
         this.onItemClick = this.onItemClick.bind(this);
-        this.getConversation = this.getConversation.bind(this);
     }
 
-    scrollToMyRef = () =>   this.myRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    scrollToMyRef = () => {
+        if(this.myRef.current !== null) return this.myRef.current.scrollIntoView({behavior: "smooth", block: "end"});
+    };
 
     onItemClick(event) {
-        const id = event.target.id;
-        this.getConversation(id);
-    }
 
-    getConversation(id) {
-        const { cookies } = this.props;
+        const interlocutor_id = event.target.id;
 
-        fetch("http://localhost:9000/chat/get/user", {
+        console.log(interlocutor_id);
+
+        fetch(`${API_URL}chat/get/user`, {
             method: 'post',
             headers: {
                 'Content-type': 'application/json',
@@ -37,14 +38,13 @@ class Dashboard extends Component {
                 'Access-Control-Allow-Headers': 'Content-type'
             },
             body: JSON.stringify({
-                "id": cookies.get('id'),
-                "interlocutor": id
+                "interlocutor": event.target.id
             })
         }).then(response => {
             if(response.statusText === 'OK') {
                 response.json().then(data => {
                     this.setState({
-                        'interlocutor': id,
+                        'interlocutor': interlocutor_id,
                         'data': JSON.stringify(data.user),
                     });
                 });

@@ -1,51 +1,13 @@
 import React, { Component } from 'react';
-import '../../css/Users.css';
+import '../../css/Users.css'
 import { withCookies } from "react-cookie";
-
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:9000');
 
-class List extends Component {
-    constructor(props) {
-        super(props);
-    }
+import List from '../components/List';
+import SearchResults from '../components/SearchResults';
+import {API_URL} from "../../config";
 
-    render() {
-        return (
-            <ul className="list-group">
-                { this.props.chats.map((chat, i) =>
-                    <li key={ chat.user_id } id={ chat.user_id } className="list-group-item d-flex justify-content-between align-items-center" onClick={this.props.onItemClick}>
-                        { chat.name }
-                        <span className="badge badge-primary badge-pill">{ chat.messages.length }</span>
-                    </li>
-                )}
-            </ul>
-        );
-    }
-}
-
-class SearchResults extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            "users": this.props.results
-        }
-    }
-
-    render() {
-        return (
-            <ul className="list-group">
-                {
-                    Object.values(JSON.parse(this.state.users)).map((user) =>
-                        <li key={ user.id } id={ user.id } className="list-group-item d-flex justify-content-between align-items-center" onClick={this.props.onItemClick}>
-                            { user.name }
-                        </li>
-                    )}
-            </ul>
-        );
-    }
-}
+const socket = openSocket(API_URL);
 
 class Users extends Component {
     constructor(props) {
@@ -69,17 +31,17 @@ class Users extends Component {
             const show_search = this.state.show_search;
 
             let flag = false;
+
+            // eslint-disable-next-line
             chats.map((chat, i) => {
                 if(chat.user_id === data.id) {
                     flag = true;
                     chats[i].messages.push(data);
-                    console.log(this.state.chats);
                     this.setState({
                         chats: chats,
                         results:results,
                         show_search: show_search
                     });
-                    console.log(this.state.chats);
                 }
             });
 
@@ -96,7 +58,7 @@ class Users extends Component {
             this.getRecentChats();
         }
 
-        fetch("http://localhost:9000/get/users", {
+        fetch(`${API_URL}get/users`, {
             method: 'post',
             headers: {
                 'Content-type': 'application/json',
@@ -124,7 +86,7 @@ class Users extends Component {
     getRecentChats() {
         const { cookies } = this.props;
 
-        fetch("http://localhost:9000/chat/get/users", {
+        fetch(`${API_URL}chat/get/users`, {
             method: 'post',
             headers: {
                 'Content-type': 'application/json',

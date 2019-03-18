@@ -1,32 +1,14 @@
 import React, { Component } from 'react';
+
 import logo from '../logo.svg';
 import '../css/App.css';
-import { GoogleLogin } from 'react-google-login';
+
+import GoogleSignIn from './components/GoogleSignIn';
+
 import {Redirect} from "react-router-dom";
 import { withCookies } from 'react-cookie';
 
-class GoogleSignIn extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      redirect: false,
-    }
-  }
-
-  render() {
-    return (
-        <div>
-          <GoogleLogin
-              clientId="195610010161-nnmg2nhcaoterfsdfqu7ubh1rd7jhl3s.apps.googleusercontent.com"
-              buttonText="Login with Google"
-              onSuccess={this.props.onSuccess}
-              onFailure={this.props.onFailure}/>
-        </div>
-    )
-  }
-}
+import { API_URL } from '../config';
 
 class App extends Component {
 
@@ -43,8 +25,9 @@ class App extends Component {
   }
 
   onSuccess(response) {
+    console.log(process.env);
     const id = response.profileObj.googleId;
-    fetch('http://localhost:9000/add/user', {
+    fetch(`${API_URL}add/user`, {
       method: 'post',
       headers: {
         'Content-type': 'application/json'

@@ -7,7 +7,6 @@ class Chat {
             const message = response.message;
             const interlocutor = response.message.id;
 
-
             User.findOne({id: interpolator}).where("chats.user_id").equals(interlocutor).exec((err, user) => {
                 if (user === null) {
                     new Promise(function (resolve, reject) {
@@ -50,7 +49,6 @@ class Chat {
 
     static typing_event(client, io) {
         client.on('typing', (response) => {
-            console.log(response);
            io.emit('typing', response);
         });
     }

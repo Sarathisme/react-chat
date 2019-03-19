@@ -1,9 +1,10 @@
 import {Component} from "react";
 import Message from '../components/Message';
 import React from "react";
+import {API_URL} from "../../config";
 
 import io from 'socket.io-client';
-const socket = io("http://localhost:9000");
+const socket = io(API_URL);
 
 class MessageList extends Component {
 
@@ -14,14 +15,18 @@ class MessageList extends Component {
             'typing': false
         };
 
-        this.subscribeToTyping = this.subscribeToTyping.bind(this);
+        this.subscribeToTyping();
     }
 
     subscribeToTyping() {
         socket.on('typing', (data) => {
-            if(data.id === this.props.user_id && data.typing === true) {
+            if(data.id === this.props.user_id && data.typing === true && data.interlocutor === this.props.interlocutor) {
                 this.setState({
                     'typing': true
+                });
+            } else {
+                this.setState({
+                    'typing': false
                 });
             }
         });

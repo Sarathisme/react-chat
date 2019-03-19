@@ -25,7 +25,6 @@ class App extends Component {
   }
 
   onSuccess(response) {
-    console.log(process.env);
     const id = response.profileObj.googleId;
     fetch(`${API_URL}add/user`, {
       method: 'post',
@@ -39,7 +38,6 @@ class App extends Component {
         photo: response.profileObj.imageUrl,
       })
     }).then((response) => {
-      console.log(response);
         if(response.statusText === "OK") {
           const { cookies } = this.props;
           cookies.set("id", id, {path: '/'});

@@ -25,10 +25,7 @@ class Dashboard extends Component {
     };
 
     onItemClick(event) {
-
         const interlocutor_id = event.target.id;
-
-        console.log(interlocutor_id);
 
         fetch(`${API_URL}chat/get/user`, {
             method: 'post',

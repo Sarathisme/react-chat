@@ -40,12 +40,18 @@ class Chat {
                         if (err) {
                             throw err;
                         } else {
-                            console.log(typeof interpolator);
                             io.emit(interpolator, message);
                         }
                     });
                 }
             });
+        });
+    }
+
+    static typing_event(client, io) {
+        client.on('typing', (response) => {
+            console.log(response);
+           io.emit('typing', response);
         });
     }
 }

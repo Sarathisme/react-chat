@@ -43,9 +43,9 @@ class ChatWindow extends Component {
         const { cookies } = this.props;
 
         if(e.target.value !== '') {
-            socket.emit("typing", {"id": this.props.interlocutor, "typing": true});
+            socket.emit("typing", {"id": this.props.interlocutor, "typing": true, "interlocutor": cookies.get('id')});
         } else {
-            socket.emit("typing", {"id": this.props.interlocutor, "typing": false});
+            socket.emit("typing", {"id": this.props.interlocutor, "typing": false, "interlocutor": cookies.get('id') });
         }
 
         if(e.keyCode === 13) {
@@ -82,6 +82,7 @@ class ChatWindow extends Component {
                                 chats: chats
                             });
                             socket.emit("chat", {"interlocuter": this.props.interlocuter, "message": message});
+                            socket.emit("typing", {"id": this.props.interlocutor, "typing": false, "interlocutor": cookies.get('id') });
                         }
                     });
                 }
@@ -127,7 +128,7 @@ class ChatWindow extends Component {
             return (
                 <div className="chat-content">
                     <Header photo={JSON.parse(this.props.data).photo} name={JSON.parse(this.props.data).name}/>
-                    <MessageList chats={this.state.chats} user_id={cookies.get('id')} myRef={this.props.myRef} scrollToMyRef={this.props.scrollToMyRef}/>
+                    <MessageList chats={this.state.chats} interlocutor={this.props.interlocutor} user_id={cookies.get('id')} myRef={this.props.myRef} scrollToMyRef={this.props.scrollToMyRef}/>
                     <MessageInput onKeyDown={this.onKeyPressed}/>
                 </div>
             );

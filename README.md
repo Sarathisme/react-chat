@@ -20,6 +20,7 @@ The main folder has the code related to the front-end of the site (React js). Th
 
 Start the react server and move to the server folder and start the node server.
 
-## `This project is hosted at the following link using heroku`
 
-https://github.com/Sarathisme/react-chat
+### `This project is hosted at the following link using heroku`
+
+<a>https://github.com/Sarathisme/react-chat</a>

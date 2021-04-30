@@ -9,7 +9,7 @@
 /coverage
 
 # config
-/src/config,js
+/src/config.js
 /server/config.js
 
 # production

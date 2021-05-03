@@ -25,7 +25,10 @@ class Chat {
     static get_messages(interlocutor, interpolator) {
         console.log(interlocutor, interpolator);
         return new Promise((resolve => {
-            User.findOne({id: interpolator}).exec((err, data) => {
+            User.findOne({id: interpolator})
+                .where("chats.user_id").equals(interlocutor)
+                .exec((err, data) => {
+                    console.log(data);
                 if(data === undefined) {
                     resolve({"data": []})
                 } else {

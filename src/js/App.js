@@ -46,15 +46,15 @@ class App extends Component {
             redirect: true,
           });
         } else {
-          console.log(response);
+          console.log("From App.js", response);
         }
     }).catch((error) => {
-      console.log(error);
+      console.log("From App.js error", error);
     });
   }
 
   onFailure(response) {
-    console.log((response));
+    console.log(("From App.js failure", response));
   }
 
   render() {

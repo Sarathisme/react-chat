@@ -11,6 +11,8 @@
 # config
 /src/config.js
 /server/config.js
+/server/node_modules
+/config.js
 
 # production
 /build

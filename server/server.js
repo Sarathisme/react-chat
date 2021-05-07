@@ -24,6 +24,7 @@ app.get('/', (req, res) => {
 
 app.post('/user', (req, res) => {
     Dashboard.get_user(req.body.id).then(data => {
+        console.log(req.body);
        res.status(200).send(data);
     });
 });

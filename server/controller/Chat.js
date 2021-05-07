@@ -7,7 +7,6 @@ class Chat {
                 new Promise(function(resolve, reject) {
                         User.findOne({id: interlocutor}, (err, data) => {
                             let chat = {};
-                            console.log(interlocutor);
                             chat["user_id"] = data.id;
                             chat["name"] = data.name;
                             chat["photo"] = data.photo;
@@ -23,18 +22,16 @@ class Chat {
     }
 
     static get_messages(interlocutor, interpolator) {
-        console.log(interlocutor, interpolator);
         return new Promise((resolve => {
             User.findOne({id: interpolator})
                 .where("chats.user_id").equals(interlocutor)
                 .exec((err, data) => {
-                    console.log(data);
-                if(data === undefined) {
-                    resolve({"data": []})
-                } else {
-                    resolve({"data": data.chats[0].messages})
-                }
-            });
+                    if(data) {
+                        resolve({"data": data.chats[0].messages})
+                    } else {
+                        resolve({"data": []})
+                    }
+                });
         }))
     }
 

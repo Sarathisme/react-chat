@@ -54,9 +54,11 @@ class ChatWindow extends Component {
             if(chats === undefined) chats = [];
 
             let message = {
-                id: cookies.get('id'),
+                sender_id: cookies.get('id'),
+                receiver_id: this.props.interlocutor,
                 message: e.target.value,
-                timestamp: Date.now().toString()
+                timestamp: Date.now().toString(),
+                _id: Date.now().toString()
             };
 
             socket.emit("chat", {"interlocutor": this.props.interlocutor, "message": message});
@@ -70,9 +72,10 @@ class ChatWindow extends Component {
                     'Access-Control-Allow-Headers': 'Content-type'
                 },
                 body: JSON.stringify({
-                    "id": cookies.get('id'),
-                    "interlocutor": this.props.interlocutor,
-                    "message": message
+                    "sender_id": message.sender_id,
+                    "receiver_id": message.receiver_id,
+                    "message": message.message,
+                    "timestamp": message.timestamp
                 })
             }).then(response => {
                 if(response.statusText === 'OK') {

@@ -53,8 +53,10 @@ class MessageList extends Component {
             messages = <div className="message-ul"/>;
         } else {
             messages = <div className="message-ul">
-                {this.props.chats.map(data => <Message direction={this.getDirection(data.id)} text={data.message}
+                {this.props.chats.map(data => <Message direction={this.getDirection(data.receiver_id)} text={data.message}
                                                        scrollToMyRef={this.props.scrollToMyRef}
+                                                       id={data._id}
+                                                       key={data._id}
                                                        myRef={this.props.myRef}/>)}
                 {status}
             </div>;

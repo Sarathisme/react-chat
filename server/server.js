@@ -47,8 +47,8 @@ app.post('/get/users', (req, res) => {
 });
 
 app.post('/chat/get/users', (req, res) => {
-    Message.find({$or: [{sender_id: req.body.id}, {receiver_id: req.body.id}]}).distinct('receiver_id', (err, data) => {
-        User.find({id: {$in: data}}, (err, data) => {
+    User.find({id: req.body.id}).exec((err, data) => {
+        User.find({id: {$in: data[0].chats}}, (err, data) => {
             res.status(200).send({"chats": data});
         })
     })

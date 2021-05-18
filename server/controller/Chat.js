@@ -31,7 +31,7 @@ class Chat {
                     } else {
                         resolve({"data": []})
                     }
-            });
+                });
         })
     }
 
@@ -44,11 +44,18 @@ class Chat {
                 timestamp: timestamp
             });
 
-            messageObject.save().then((err, data) => {
-                if (err) {
-                    throw err;
-                } else {
-                    resolve({"data": data});
+            messageObject.save().then((data) => {
+                try {
+                    if (data) {
+                        User.updateOne(
+                            {id: senderID},
+                            {$push: {chats: receiverID}},
+                            (err, data) => {
+                                resolve({"data": data});
+                            })
+                    }
+                } catch (e) {
+                    console.log("eRRROR!", e)
                 }
             })
         });

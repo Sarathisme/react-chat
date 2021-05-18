@@ -5,7 +5,8 @@ const userSchema = new Schema({
     id: String,
     name: String,
     photo: String,
-    email: String
+    email: String,
+    chats: []
 });
 
 const User = mongoose.model('User', userSchema);

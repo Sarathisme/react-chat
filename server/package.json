@@ -16,7 +16,7 @@
     "nodemon": "^1.18.10",
     "opennode": "^1.0.3",
     "openode": "^1.9.8",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.4.0",
     "socket.io-client": "^2.2.0"
   }
 }

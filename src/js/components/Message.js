@@ -15,7 +15,7 @@ class Message extends Component {
     render() {
         return (
             <div className="message-li">
-                <div className="message-text" id={this.props.direction}>
+                <div className="message-text" id={this.props.direction} key={this.props.id}>
                     {this.props.text}
                     <div ref={this.props.myRef} />
                 </div>

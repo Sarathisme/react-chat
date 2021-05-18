@@ -6,6 +6,7 @@ const cors = require('cors');
 const {PORT, DATABASE_URI} =  require('./config');
 
 const { User } = require('./models/Users');
+const { Message } = require('./models/Messages');
 
 const Dashboard = require('./controller/Dashboard');
 const Chat = require('./controller/Chat');
@@ -24,7 +25,6 @@ app.get('/', (req, res) => {
 
 app.post('/user', (req, res) => {
     Dashboard.get_user(req.body.id).then(data => {
-        console.log(req.body);
        res.status(200).send(data);
     });
 });
@@ -47,9 +47,11 @@ app.post('/get/users', (req, res) => {
 });
 
 app.post('/chat/get/users', (req, res) => {
-    User.findOne({id: req.body.id}, (err, user) => {
-        res.status(200).send({"chats": user.chats});
-    });
+    User.find({id: req.body.id}).exec((err, data) => {
+        User.find({id: {$in: data[0].chats}}, (err, data) => {
+            res.status(200).send({"chats": data});
+        })
+    })
 });
 
 app.post('/chat/get/user', (req, res) => {
@@ -60,12 +62,12 @@ app.post('/chat/get/user', (req, res) => {
 
 app.post('/chat/get/messages', (req, res) => {
     Chat.get_messages(req.body.interlocutor, req.body.id).then(data => {
-       res.send(data);
+        res.send(data);
     });
 });
 
 app.post('/chat/post/messages', (req, res) => {
-    Chat.post_messages(req.body.interlocutor, req.body.id, req.body.message).then(data => {
+    Chat.post_messages(req.body.sender_id, req.body.receiver_id, req.body.message, req.body.timestamp).then(data => {
         res.send(data);
     });
 });

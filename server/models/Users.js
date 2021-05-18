@@ -6,18 +6,7 @@ const userSchema = new Schema({
     name: String,
     photo: String,
     email: String,
-    chats: [
-        {
-            user_id: String,
-            name: String,
-            photo: String,
-            messages: [{
-                id: String,
-                message: String,
-                timestamp: String
-            }]
-        }
-    ]
+    chats: []
 });
 
 const User = mongoose.model('User', userSchema);
